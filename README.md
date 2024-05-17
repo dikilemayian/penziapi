@@ -1,113 +1,74 @@
 Penzi Dating App
 
-Penzi is a dating app that connects users based on their preferences. This README file will guide you through the setup, usage, and features of the Penzi Dating App.
+Penzi is a mobile dating application designed to connect users with potential matches based on their preferences. The app enables users to register, update their profiles, describe themselves, and find matches by sending structured text messages. Penzi leverages Django, Django REST Framework, and MySQL to handle user data and matchmaking processes efficiently.
 
 Table of Contents
 Features
+Technology Stack
 Setup
 Usage
 API Endpoints
 Classes and Methods
 Logging
-
 Features
+
 User Registration
-Register a New User: Users can register by sending a message in the format:
-less
-Copy code
-start#name#age#gender#county#town
+Users can easily register by sending a text message in a specific format. This information is stored in the database, creating a new user profile.
+
 Profile Update
-Update User Details: Users can update their profile details by sending:
-less
-Copy code
-details#levelOfEducation#profession#maritalStatus#religion#ethnicity
+Users can update their profile details at any time by sending a message in a specified format. This allows users to keep their profiles current with their latest information.
+
 Self-Description
-Add a Description: Users can add a personal description by sending:
-Copy code
-MYSELF description
+Users can add a personal description by sending a message starting with a specific keyword. This description helps potential matches learn more about the user.
+
 Matchmaking
-Find Matches: Users can find potential matches by sending:
-less
-Copy code
-match#age-range#town#gender
+To find potential matches, users can send a message in a specified format. The app will then search the database for users that match the specified criteria and return a list of potential matches.
+
 Match Navigation
-View Next Matches: To view the next set of matches, users can send:
+Users can navigate through their matches by sending specific commands to view the next or previous set of matches. This ensures users can explore multiple potential matches.
 
-vbnet
-Copy code
-NEXT
-View Previous Matches: To view the previous set of matches, users can send:
 
-Copy code
-PREV
+
+Technology Stack
+
+Backend: Django and Django REST Framework
+Database: MySQL
+Messaging: Text messages (SMS) to interact with the app
+
 Setup
 Prerequisites
 Python 3.x
 Django
 Django REST Framework
 MySQL
+
 Installation
-Clone the repository:
+Clone the repository and navigate to the project directory.
+Install the required dependencies.
+Configure your database settings in the Django settings file.
+Run the database migrations.
+Start the Django development server.
 
-bash
-Copy code
-git clone https://github.com/yourusername/penzi-dating-app.git
-cd penzi-dating-app
-Install dependencies:
-
-bash
-Copy code
-pip install -r requirements.txt
-Configure your database settings in settings.py:
-
-bash
-Copy code
-python manage.py migrate
-Start the Django development server:
-
-bash
-Copy code
-python manage.py runserver
 Usage
 Registration
-To register, send a message in the format:
-less
-Copy code
-start#name#age#gender#county#town
+Users can register by sending a text message in a specific format with their basic information.
+
 Updating User Details
-To update user details, send a message in the format:
-less
-Copy code
-details#levelOfEducation#profession#maritalStatus#religion#ethnicity
+Users can update their additional details by sending a text message in a specified format.
+
 Describing Yourself
-To add a description, send a message starting with:
-Copy code
-MYSELF description
+Users can add a brief personal description by sending a message starting with a specific keyword.
+
 Finding Matches
-To find matches, send a message in the format:
-less
-Copy code
-match#age-range#town#gender
+Users can find matches by sending a text message in a specified format.
+
 Navigating Matches
-To view the next set of matches, send:
+Users can view the next or previous set of matches by sending specific commands.
 
-vbnet
-Copy code
-NEXT
-To view the previous set of matches, send:
-
-Copy code
-PREV
 API Endpoints
 PenziMessageView
 POST /api/message/: Handles incoming messages and returns appropriate responses.
-Example request:
-json
-Copy code
-{
-  "message_content": "start#John Doe#26#Male#Nakuru#Naivasha",
-  "msisdn": "254700000001"
-}
+GET /api/message/: Fetches matches based on user preferences.
 UserProfileDetail
 GET /api/user-profile/{id}: Retrieves user profile details based on the provided user ID.
 Classes and Methods
@@ -115,24 +76,24 @@ MatchProcessor
 Handles match processing based on user preferences.
 
 Methods:
-process_match_message(message_content, msisdn): Processes match requests.
-get_next_matches(msisdn): Retrieves the next set of matches.
-get_prev_matches(msisdn): Retrieves the previous set of matches.
-format_matches_response(potential_matches): Formats the match results into a string.
+Processes match requests.
+Retrieves the next set of matches.
+Retrieves the previous set of matches.
+Formats the match results into a string.
 PenziMessageView
 Handles incoming messages and routes them to the appropriate processor.
 
 Methods:
-post(request): Handles POST requests for incoming messages.
-get(request): Handles GET requests to fetch matches.
-generate_response_message(message_content, msisdn): Generates response messages based on content.
-save_message_from(message_content, msisdn): Saves incoming messages to the database.
-save_message_to(response_message, short_code): Saves response messages to the database.
-save_user_info(message_content, msisdn): Saves new user information.
-update_user_info(msisdn, message_content): Updates existing user information.
-process_start_message(message_content): Processes start messages.
-process_details_message(message_content): Processes detail update messages.
-process_myself_message(message_content): Processes self-description messages.
+Handles POST requests for incoming messages.
+Handles GET requests to fetch matches.
+Generates response messages based on content.
+Saves incoming messages to the database.
+Saves response messages to the database.
+Saves new user information.
+Updates existing user information.
+Processes start messages.
+Processes detail update messages.
+Processes self-description messages.
 Logging
-The application uses Python's built-in logging module to log errors and exceptions.
-Logs can be found in the configured log file or console output based on the logger configuration.
+The application uses Python's built-in logging module to log errors and important events.
+
