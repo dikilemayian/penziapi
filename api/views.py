@@ -159,8 +159,8 @@ class PenziMessageView(APIView):
         self.db_params = {
             "host": "localhost",
             "database": "api",
-            "user": "dixon",
-            "password": "dixon2000"
+            "user": "",
+            "password": ""
         }
         self.match_processor = MatchProcessor(self.db_params)
 
